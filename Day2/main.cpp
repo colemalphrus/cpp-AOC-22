@@ -22,14 +22,41 @@ int win(char a, char b){
     return 0;
 }
 
+char resp(char a, char b){
+    std::unordered_map<char, char> loose_to = {
+            {'B', 'A'},
+            {'C', 'B'},
+            {'A', 'C'},
+    };
+    std::unordered_map<char, char> beat = {
+            {'A', 'B'},
+            {'B', 'C'},
+            {'C', 'A'},
+    };
+
+    switch (b) {
+        case 'X':
+            return loose_to[a];
+        case 'Z':
+            return beat[a];
+        default:
+            return a;
+    }
+}
+
 int score(char a, char b){
     std::unordered_map<char, int> conversion = {
-            {'X', 1},
-            {'Y', 2},
-            {'Z', 3},
+            {'A', 1},
+            {'B', 2},
+            {'C', 3},
     };
-    return win(a, b) + conversion[b];
-}
+    std::unordered_map<char, int> outcome = {
+            {'X', 0},
+            {'Y', 3},
+            {'Z', 6},
+    };
+    return outcome[b] + conversion[resp(a, b)];
+};
 
 int main(){
     std::cout << "Day 2" << std::endl;
@@ -41,7 +68,6 @@ int main(){
     int summation = 0;
     while( std::getline(file, line) ) {
         int s = score(line[0], line[2]);
-//        std::cout << s << std::endl;
         summation += s;
     };
 
