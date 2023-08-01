@@ -4,7 +4,7 @@
 
 using namespace std;
 int main(){
-    cout << "Hello World" << endl;
+    cout << "Day 3" << endl;
     fstream file("./Day3/data.txt");
     string line;
 
